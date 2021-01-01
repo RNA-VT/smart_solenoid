@@ -3,7 +3,6 @@
 
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager/tree/development
 #include "wm_params.h"
-#include <EEPROM.h>
 
 #include "config.h"
 

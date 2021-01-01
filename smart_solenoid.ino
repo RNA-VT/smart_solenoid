@@ -12,36 +12,23 @@
 #include <EEPROM.h>
 
 #include "config.h"
+#include "memory.h"
 #include "wifimanager_adapter.h"
+#include "server_adapter.h"
 
+ServerAdapter server_adapter(80);
 Configuration config;
+Memory memory;
 
 void setup()
 {
     Serial.begin(115200);
-    WifiManagerAdapter wm;
 
-    //Load Config
-    EEPROM.begin(512);
-    EEPROM.get(0, config);
-
-    //TODO: Use an input to trigger the portal and
-    // default to starting up from saved data
-    //For now, always run the wm portal
-    wm.setup(&config);
-
-    //Save
-    EEPROM.put(0, config);
-    if (EEPROM.commit())
-    {
-        Serial.println("Settings saved");
-    }
-    else
-    {
-        Serial.println("EEPROM error");
-    }
+    init_config();
     delay(500);
+
     pinMode(config.output_pin, OUTPUT);
+    delay(500);
 
     setup_wifi();
     delay(500);
@@ -49,6 +36,23 @@ void setup()
 
 void loop()
 {
+    server_adapter.Listen(config);
+}
+
+void init_config()
+{
+    WifiManagerAdapter wm;
+
+    //Load Config
+    config = memory.Load();
+
+    //TODO: Use an input to trigger the portal and
+    // default to starting up from saved data
+    //For now, always run the wm portal
+    wm.setup(&config);
+
+    //Save
+    memory.Save(config);
 }
 
 void setup_wifi()
