@@ -66,7 +66,7 @@ void Configuration::wm_setup()
         }
         else
         {
-            Serial.println("Invalid or Missing Subnet. Defaulting to 255.255.255.0");
+            Serial.println("Invalid or Missing Subnet.");
         }
     }
 }
