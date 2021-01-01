@@ -24,7 +24,7 @@ void setup()
     EEPROM.begin(512);
     EEPROM.get(0, config);
 
-    //TODO: Use an input to trigger the portal and 
+    //TODO: Use an input to trigger the portal and
     // default to starting up from saved data
     //For now, always run the wm portal
     config.wm_setup();
