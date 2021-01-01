@@ -43,8 +43,8 @@ void setup()
     delay(500);
     pinMode(config.output_pin, OUTPUT);
 
-    //connect to saved SSID
-    WiFi.begin();
+    setup_wifi();
+    delay(500);
 }
 
 void loop()
