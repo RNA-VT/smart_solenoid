@@ -1,9 +1,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
-#include <WiFiManager.h> // https://github.com/tzapu/WiFiManager/tree/development
 #include <Arduino.h>
-#include "wm_params.h"
-#include <EEPROM.h>
 
 class Configuration
 {
@@ -14,7 +11,6 @@ public:
     uint32_t ip;
     uint32_t gateway;
     uint32_t subnet;
-    void wm_setup();
 };
 
 #endif

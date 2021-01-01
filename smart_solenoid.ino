@@ -9,16 +9,17 @@
 #endif
 
 #include <ArduinoJson.h>
-#include <WiFiManager.h> // https://github.com/tzapu/WiFiManager/tree/development
 #include <EEPROM.h>
 
 #include "config.h"
+#include "wifimanager_adapter.h"
 
 Configuration config;
 
 void setup()
 {
     Serial.begin(115200);
+    WifiManagerAdapter wm;
 
     //Load Config
     EEPROM.begin(512);
@@ -27,7 +28,7 @@ void setup()
     //TODO: Use an input to trigger the portal and
     // default to starting up from saved data
     //For now, always run the wm portal
-    config.wm_setup();
+    wm.setup(&config);
 
     //Save
     EEPROM.put(0, config);
@@ -40,7 +41,6 @@ void setup()
         Serial.println("EEPROM error");
     }
     delay(500);
-
     pinMode(config.output_pin, OUTPUT);
 
     //connect to saved SSID
