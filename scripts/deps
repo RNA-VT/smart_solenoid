@@ -12,8 +12,7 @@ git checkout development
 cd ..
 
 # Copy into arduino-cli library folder
-sudo cp -r WiFiManager/ $USER_DIR/libraries/WiFiManager32/
+sudo cp -r WiFiManager/ $USER_DIR/libraries/WiFiManager/
 
 # Clean up
-sudo rm -r WiFiManager 
-
+sudo rm -r WiFiManager
