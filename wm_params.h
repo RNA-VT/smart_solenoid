@@ -32,4 +32,5 @@ public:
         return String(WiFiManagerParameter::getValue()).toInt();
     }
 };
+
 #endif

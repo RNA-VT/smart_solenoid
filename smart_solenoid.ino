@@ -16,7 +16,8 @@
 #include "wifimanager_adapter.h"
 #include "solenoid_server.h"
 
-SolenoidServer solenoid_server(80);
+WiFiServer server(80);
+SolenoidServer solenoid_server(&server);
 Configuration config;
 
 void setup()
@@ -30,6 +31,9 @@ void setup()
     delay(500);
 
     setup_wifi();
+    delay(500);
+
+    server.begin();
     delay(500);
 }
 
@@ -60,10 +64,9 @@ void setup_wifi()
     WiFi.begin();
     WiFi.setSleep(false);
 
-    IPAddress ip(config.ip);
-    IPAddress gateway(config.gateway);
-    IPAddress subnet(config.subnet);
-    WiFi.config(ip, gateway, subnet);
+    WiFi.config(IPAddress(config.ip),
+                IPAddress(config.gateway),
+                IPAddress(config.subnet));
 
     int loop_limit = 30;
     int count = 0;
@@ -75,7 +78,7 @@ void setup_wifi()
     }
     if (count == loop_limit)
     {
-        ESP.restart();
+        //ESP.restart();
     }
     Serial.println("WiFi connected, IP = ");
     Serial.println(WiFi.localIP());

@@ -5,9 +5,8 @@
  * 
  * @param  {int} port : to listen on
  */
-SolenoidServer::SolenoidServer(int port)
+SolenoidServer::SolenoidServer(WiFiServer* server)
 {
-  WiFiServer server(port);
   this->server = server;
 }
 /**
@@ -17,7 +16,7 @@ SolenoidServer::SolenoidServer(int port)
 void SolenoidServer::Listen(Configuration config)
 {
   String header;
-  WiFiClient client = this->server.available(); // Listen for incoming clients
+  WiFiClient client = this->server->available(); // Listen for incoming clients
 
   if (client)
   {                                          // If a new client connects,
@@ -49,10 +48,7 @@ void SolenoidServer::Listen(Configuration config)
               Serial.println("Command: Output on");
               if (!this->output_state)
               {
-                if (config.inverted_output > 0)
-                {
-                  digitalWrite(config.output_pin, HIGH);
-                }
+                digitalWrite(config.output_pin, HIGH);
               }
             }
             else if (header.indexOf("GET /output/off") >= 0)

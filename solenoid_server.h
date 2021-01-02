@@ -14,12 +14,12 @@
 class SolenoidServer
 {
 public:
-  WiFiServer server;
+  WiFiServer* server;
   /**
    * constructor
    * @param  {int} port : 
    */
-  SolenoidServer(int port);
+  SolenoidServer(WiFiServer* server);
   /**
    * Listen - check for and serve clients
    */
