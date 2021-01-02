@@ -1,15 +1,13 @@
-
 #include "solenoid_server.h"
-/**
- * Server - ctor
- * 
- * @param  {int} port : to listen on
- */
-SolenoidServer::SolenoidServer(int port)
+
+WiFiServer server(80);
+
+void SolenoidServer::begin()
 {
-  WiFiServer server(port);
-  this->server = server;
+  Serial.println("Begin Server...");
+  server.begin(80);
 }
+
 /**
  * Server - Listen
  * 
@@ -17,7 +15,7 @@ SolenoidServer::SolenoidServer(int port)
 void SolenoidServer::Listen(Configuration config)
 {
   String header;
-  WiFiClient client = this->server.available(); // Listen for incoming clients
+  WiFiClient client = server.available(); // Listen for incoming clients
 
   if (client)
   {                                          // If a new client connects,
@@ -49,17 +47,15 @@ void SolenoidServer::Listen(Configuration config)
               Serial.println("Command: Output on");
               if (!this->output_state)
               {
-                if (config.inverted_output > 0)
-                {
-                  digitalWrite(config.output_pin, HIGH);
-                }
+                this->output_state = true;
+                digitalWrite(config.output_pin, HIGH);
               }
             }
             else if (header.indexOf("GET /output/off") >= 0)
             {
               Serial.println("Output off");
               this->output_state = false;
-              // digitalWrite(atoi(output), LOW);
+              digitalWrite(config.output_pin, LOW);
             }
 
             // Display the HTML web page
@@ -79,11 +75,11 @@ void SolenoidServer::Listen(Configuration config)
             // Display current state, and ON/OFF buttons for the defined GPIO
             if (this->output_state)
             {
-              client.println("<p>Output - State On </p>");
+              client.println("<p>Output - State ON </p>");
             }
             else
             {
-              client.println("<p>Output - State On </p>");
+              client.println("<p>Output - State OFF </p>");
             }
 
             // If the this->output_state is off, it displays the ON button

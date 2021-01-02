@@ -6,7 +6,6 @@ class Configuration
 {
 public:
     int output_pin;
-    int inverted_output;
     char name[24];
     uint32_t ip;
     uint32_t gateway;
