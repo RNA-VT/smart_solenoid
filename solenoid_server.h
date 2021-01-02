@@ -1,5 +1,5 @@
-#ifndef SERVER_H
-#define SERVER_H
+#ifndef SOLENOID_SERVER_H
+#define SOLENOID_SERVER_H
 #ifdef ESP8266
 #include <esp8266wifi.h>
 #include <ESP8266WebServer.h>
@@ -14,17 +14,12 @@
 class SolenoidServer
 {
 public:
-  WiFiServer* server;
-  /**
-   * constructor
-   * @param  {int} port : 
-   */
-  SolenoidServer(WiFiServer* server);
   /**
    * Listen - check for and serve clients
    */
   void Listen(Configuration config);
   bool output_state = false;
+  void begin();
 };
 
 #endif

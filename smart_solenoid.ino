@@ -16,8 +16,7 @@
 #include "wifimanager_adapter.h"
 #include "solenoid_server.h"
 
-WiFiServer server(80);
-SolenoidServer solenoid_server(&server);
+SolenoidServer solenoid_server;
 Configuration config;
 
 void setup()
@@ -33,7 +32,7 @@ void setup()
     setup_wifi();
     delay(500);
 
-    server.begin();
+    solenoid_server.begin();
     delay(500);
 }
 
