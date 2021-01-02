@@ -18,7 +18,6 @@
 
 SolenoidServer solenoid_server(80);
 Configuration config;
-Memory memory;
 
 void setup()
 {
@@ -41,6 +40,7 @@ void loop()
 
 void init_config()
 {
+    Memory memory;
     WifiManagerAdapter wm;
 
     //Load Config
