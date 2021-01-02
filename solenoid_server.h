@@ -11,7 +11,7 @@
 #include <DNSServer.h>
 #include "config.h"
 
-class ServerAdapter
+class SolenoidServer
 {
 public:
   WiFiServer server;
@@ -19,7 +19,7 @@ public:
    * constructor
    * @param  {int} port : 
    */
-  ServerAdapter(int port);
+  SolenoidServer(int port);
   /**
    * Listen - check for and serve clients
    */

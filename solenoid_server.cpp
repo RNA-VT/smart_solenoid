@@ -1,11 +1,11 @@
 
-#include "server_adapter.h"
+#include "solenoid_server.h"
 /**
  * Server - ctor
  * 
  * @param  {int} port : to listen on
  */
-ServerAdapter::ServerAdapter(int port)
+SolenoidServer::SolenoidServer(int port)
 {
   WiFiServer server(port);
   this->server = server;
@@ -14,7 +14,7 @@ ServerAdapter::ServerAdapter(int port)
  * Server - Listen
  * 
  */
-void ServerAdapter::Listen(Configuration config)
+void SolenoidServer::Listen(Configuration config)
 {
   String header;
   WiFiClient client = this->server.available(); // Listen for incoming clients

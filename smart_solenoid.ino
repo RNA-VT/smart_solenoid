@@ -14,9 +14,9 @@
 #include "config.h"
 #include "memory.h"
 #include "wifimanager_adapter.h"
-#include "server_adapter.h"
+#include "solenoid_server.h"
 
-ServerAdapter server_adapter(80);
+SolenoidServer solenoid_server(80);
 Configuration config;
 Memory memory;
 
@@ -36,7 +36,7 @@ void setup()
 
 void loop()
 {
-    server_adapter.Listen(config);
+    solenoid_server.Listen(config);
 }
 
 void init_config()
