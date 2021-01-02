@@ -1,0 +1,18 @@
+#!/usr/bin/fish
+
+# Get configured 
+set USER_DIR (arduino-cli config dump | yq r - 'directories.user')
+
+# Pull WifiManger Source
+gh repo clone tzapu/WiFiManager
+cd WiFiManager
+
+# Only the development branch supports ESP32
+git checkout development
+cd ..
+
+# Copy into arduino-cli library folder
+sudo cp -r WiFiManager/ $USER_DIR/libraries/WiFiManager/
+
+# Clean up
+sudo rm -r WiFiManager
